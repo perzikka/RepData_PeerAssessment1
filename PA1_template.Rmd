@@ -7,19 +7,30 @@ output:
 
 
 ## Loading and preprocessing the data
-
+```{r}
+data <- read.csv(unz("activity.zip", "activity.csv"), stringsAsFactors=FALSE, header = TRUE)
+```
 
 
 ## What is mean total number of steps taken per day?
-
-
+```{r}
+require(ggplot2)
+mu_steps = aggregate(steps ~ date, data, mean)
+colnames(mu_steps)[2] = "mu_steps"
+var_steps = aggregate(steps ~ date, data, var)
+colnames(var_steps)[2] = "var_steps"
+merge(mu_steps,var_steps,by="date")
+sum_steps = aggregate(steps ~ date, data, sum)
+hist(sum_data$steps, main="Distribution of sum(steps) per day", xlab="sum(steps)", breaks = 10d)
+```
 
 ## What is the average daily activity pattern?
 
 
 
 ## Imputing missing values
-
-
+```{r}
+c("NA in steps", length(which(is.na(data$steps))))
+```
 
 ## Are there differences in activity patterns between weekdays and weekends?
